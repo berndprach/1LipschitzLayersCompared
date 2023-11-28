@@ -1,0 +1,27 @@
+## Default settings for the main comparison
+# this file can be loaded with the following command:
+# import yaml
+# with open('settings/defaults.yml') as f:
+#     defaults = yaml.load(f, Loader=yaml.SafeLoader)
+
+batch_size: 256
+num_workers: 4
+
+optimizer: 
+  name: SGD
+  momentum: 0.9
+
+lr_scheduler:
+  name: OneCycleLR
+
+trainset:
+  name: TinyImageNet
+  center: True
+
+loss:
+  name: LipCrossEntropyLoss
+  margin: 0.3993
+  temperature: 0.25
+
+model:
+  nrof_classes: 200

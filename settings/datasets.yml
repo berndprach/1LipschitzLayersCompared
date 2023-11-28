@@ -1,0 +1,19 @@
+# TODO: dataset should be created according to this setting file
+
+CIFAR10:
+  train_transforms:
+    ToTensor:
+    Normalize:
+      mean: [0.4914, 0.4822, 0.4465]
+      std: [1., 1., 1.]
+    RandomCrop:
+      size: 32
+      padding: 4
+    RandomHorizontalFlip:
+      p: 0.5
+
+  test_transforms:
+    ToTensor:
+    Normalize:
+      mean: [0.4914, 0.4822, 0.4465]
+      std: [1., 1., 1.]

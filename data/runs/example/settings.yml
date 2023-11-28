@@ -1,0 +1,53 @@
+model:
+  !model
+  name: conv_net
+  model_id: ConvNetMc
+  linear: !layer BjorckLinear
+  conv: !coiche [!layer SOC, !layer AOConv2d]
+  activation: !layer Abs
+  nclasses: 10
+  seed: 12345
+
+trainset:
+  !dataset
+  name: CIFAR10
+  center: True
+  train: True
+
+batch_size: 256
+epochs: 300
+optimizer:
+  !optimizer
+  name: Adam
+
+lr_scheduler: 
+  !scheduler
+  name: 'MultiStepLR'
+  milestones: [100, 200]
+  gamma: 0.5
+
+loss:
+  !metric
+  name: 'LipCrossEntropyLoss'
+  margin: !randfloat [0.707, 0.708]
+  temperature: !choice [0.0625, 0.125]
+
+eval_metrics:
+  margin_avg:
+    !metric
+    name: Margin
+    aggregation: mean
+
+  margin_at_55:
+    !metric
+    name: Margin
+    aggregation: 'lambda x: x.quantile(0.55)'
+
+  robstacc_36:
+    !metric
+    name: RobustAccuracy
+    eps: 0.1411 # 36/255
+
+  throughput:
+    !metric
+    name: Throughput

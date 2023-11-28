@@ -1,0 +1,78 @@
+
+## Training settings for CIFAR10 and the random_search
+## These settings file are automatically generated you should not edit them
+## If you want to change the settings, please edit the defaults.yml file
+## or the epoch_budget.yml file
+
+model:
+  !model
+  name: conv_net
+  model_id: ConvNetS
+  get_conv: !layer BCOP
+  get_activation: !layer MaxMin
+  seed: !randint [0,999]
+  get_linear: !layer BjorckLinear
+
+epochs: 125
+
+optimizer:
+  !optimizer
+  name: SGD    
+  lr: !randlog10 [-4, -1]
+  weight_decay: !randlog10 [-5.5, -3.5]
+  momentum: 0.9
+  
+
+lr_scheduler:
+  !scheduler
+  name: OneCycleLR
+  epochs: 125
+
+loss:
+  !metric
+  name: LipCrossEntropyLoss
+  margin: 0.3993
+  temperature: 0.25
+  
+
+trainset:
+  !dataset
+  name: CIFAR10
+  train: True
+  center: true
+  
+
+# Other settings
+batch_size: 256
+num_workers: 4
+
+eval_metrics:
+  margin_at_50:
+    !metric
+    name: Margin
+    aggregation: 'lambda x: -((-x).quantile(0.5))'
+
+  robstacc_36:
+    !metric
+    name: RobustAccuracy
+    eps: 0.1411 
+
+  robstacc_72:
+    !metric
+    name: RobustAccuracy
+    eps: 0.2824
+
+  robstacc_108:
+    !metric
+    name: RobustAccuracy
+    eps: 0.4235
+
+  robstacc_255:
+    !metric
+    name: RobustAccuracy
+    eps: 1.0
+
+  throughput:
+    !metric
+    name: Throughput
+
