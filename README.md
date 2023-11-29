@@ -1,6 +1,9 @@
-This repository contains the code for the training and the evaluation of lipschitz bounded layers.
+This repository contains code for the paper [1-Lipschitz Layers Compared: Memory, Speed, and Certifiable Robustness](https://arxiv.org/abs/2311.16833).
 
 ## Requirements
+- torch==1.12
+- python==3.9
+
 TODO
 
 ## Reproducing the results
