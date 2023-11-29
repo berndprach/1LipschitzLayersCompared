@@ -4,7 +4,6 @@ This repository contains code for the paper [1-Lipschitz Layers Compared: Memory
 - torch==1.12
 - python==3.9
 
-TODO
 
 ## Reproducing the results
 The results can be replicated by followng the steps below.
