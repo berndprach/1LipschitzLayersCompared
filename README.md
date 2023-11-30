@@ -1,5 +1,5 @@
 This repository contains code for the paper [1-Lipschitz Layers Compared: Memory, Speed, and Certifiable Robustness](https://arxiv.org/abs/2311.16833),
-where we compare different methods of generating 1-Lipschitz layers. A summary of our results is below.
+where we compare different methods of generating 1-Lipschitz layers. A figure summarizing our findings is below.
 
 <img src="https://github.com/berndprach/1LipschitzLayersCompared/blob/main/data/radar_plot.png" alt="Radar plot of results" width="800"/>
 
