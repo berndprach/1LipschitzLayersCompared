@@ -1,4 +1,10 @@
-This repository contains code for the paper [1-Lipschitz Layers Compared: Memory, Speed, and Certifiable Robustness](https://arxiv.org/abs/2311.16833).
+This repository contains code for the paper [1-Lipschitz Layers Compared: Memory, Speed, and Certifiable Robustness](https://arxiv.org/abs/2311.16833),
+where we compare different methods of generating 1-Lipschitz layers. A summary of our results is below.
+
+<img src="https://github.com/berndprach/1LipschitzLayersCompared/blob/main/data/radar_plot.png" alt="drawing" width="800"/>
+
+In this repository we provide the code for both the random hyperparameter search, as well as training the final models.
+We also provide code to estimate the memory and time requirements for each method.
 
 ## Requirements
 - torch==1.12
