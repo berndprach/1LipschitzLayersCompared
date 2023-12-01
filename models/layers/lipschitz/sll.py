@@ -2,7 +2,11 @@
 SDP-based Lipschitz Layers,
 introduced in paper https://openreview.net/pdf?id=k71IGLC8cfc.
 Code (adapted) from
-https://github.com/araujoalexandre/Lipschitz-SLL-Networks/blob/main/core/models/layers.py
+https://github.com/araujoalexandre/Lipschitz-SLL-Networks/commit/faaa02e34ce4a81cfece26c411fcdf1f711b0579
+
+Note that an updated version can be found in https://github.com/araujoalexandre/Lipschitz-SLL-Networks/blob/main/core/models/layers.py
+where numerical issues have been resolved.
+
 """
 
 from typing import Callable, Optional, Union
