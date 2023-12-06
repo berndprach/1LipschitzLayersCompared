@@ -1,0 +1,104 @@
+20230822:10:14:40 Loading of the setting file...
+20230822:10:14:40 Running on device cuda
+20230822:10:14:40 Saving current configuration...
+20230822:10:14:40 batch_size: 256
+device: cuda
+epochs: 132
+eval_metrics:
+  margin_at_50: !metric
+    aggregation: 'lambda x: -((-x).quantile(0.5))'
+    name: Margin
+  robstacc_108: !metric
+    eps: 0.4235
+    name: RobustAccuracy
+  robstacc_255: !metric
+    eps: 1.0
+    name: RobustAccuracy
+  robstacc_36: !metric
+    eps: 0.1411
+    name: RobustAccuracy
+  robstacc_72: !metric
+    eps: 0.2824
+    name: RobustAccuracy
+  throughput: !metric
+    name: Throughput
+loss: !metric
+  margin: 0.3993
+  name: LipCrossEntropyLoss
+  temperature: 0.25
+lr_scheduler: !scheduler
+  epochs: 132
+  name: OneCycleLR
+model: !model
+  get_activation: !layer 'MaxMin'
+  get_conv: !layer 'LOT'
+  model_id: ConvNetM
+  name: conv_net
+  seed: 801
+num_workers: 4
+optimizer: !optimizer
+  lr: 0.0234938619191173
+  momentum: 0.9
+  name: SGD
+  weight_decay: 8.677492147964722e-06
+trainset: !dataset
+  center: true
+  name: CIFAR10
+  train: true
+valset: !dataset
+  center: true
+  name: CIFAR10
+  train: false
+
+20230822:10:14:40 Done.
+20230822:10:14:40 Loading objects...
+20230822:10:14:42 Initializing trainer...
+20230822:10:14:44 Loading training dataloader
+20230822:10:14:44 Loading validation dataloader
+20230822:10:14:44 Statistics to be computed: 
+20230822:10:14:44 Metric Aggreggation Map:
+{'train_loss': 'mean'
+ 'val_loss': 'mean'
+ 'train_accuracy': 'mean'
+ 'val_accuracy': 'mean'
+ 'train_robstacc_108': 'mean'
+ 'val_robstacc_108': 'mean'
+ 'train_robstacc_255': 'mean'
+ 'val_robstacc_255': 'mean'
+ 'train_robstacc_36': 'mean'
+ 'val_robstacc_36': 'mean'
+ 'train_robstacc_72': 'mean'
+ 'val_robstacc_72': 'mean'
+ 'train_throughput': 'mean'
+ 'val_throughput': 'mean'
+ 'train_margin_at_50': <function <lambda> at 0x1523e027f160>
+ 'val_margin_at_50': <function <lambda> at 0x1523e027f1f0>
+ 'epoch': 'none'}
+Empty DataFrame
+Columns: [epoch, train_loss, val_loss, train_accuracy, val_accuracy, train_margin_at_50, val_margin_at_50, train_robstacc_108, val_robstacc_108, train_robstacc_255, val_robstacc_255, train_robstacc_36, val_robstacc_36, train_robstacc_72, val_robstacc_72, train_throughput, val_throughput]
+Index: []
+20230822:10:14:44 Start training...
+20230822:10:14:46 Error while training:
+20230822:10:14:46 CUDA out of memory. Tried to allocate 50.00 MiB (GPU 0; 22.20 GiB total capacity; 20.33 GiB already allocated; 44.12 MiB free; 21.09 GiB reserved in total by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
+Traceback (most recent call last):
+  File "/nfs/scistore14/chlgrp/fbrau/lipschitz-layers-evaluation/./train.py", line 99, in start_train
+    trainer.run(run_path)
+  File "/nfs/scistore14/chlgrp/fbrau/lipschitz-layers-evaluation/trainer/train_module.py", line 159, in run
+    self.train_step(epoch)
+  File "/nfs/scistore14/chlgrp/fbrau/lipschitz-layers-evaluation/trainer/train_module.py", line 129, in train_step
+    loss, out = self.update_weights(inputs, labels)
+  File "/nfs/scistore14/chlgrp/fbrau/lipschitz-layers-evaluation/trainer/train_module.py", line 106, in update_weights
+    out = self.model(inputs)
+  File "/mnt/nfs/clustersw/Debian/bullseye/cuda/11.3/pytorch/1.12.1/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1130, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/mnt/nfs/clustersw/Debian/bullseye/cuda/11.3/pytorch/1.12.1/lib/python3.9/site-packages/torch/nn/modules/container.py", line 139, in forward
+    input = module(input)
+  File "/mnt/nfs/clustersw/Debian/bullseye/cuda/11.3/pytorch/1.12.1/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1130, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/mnt/nfs/clustersw/Debian/bullseye/cuda/11.3/pytorch/1.12.1/lib/python3.9/site-packages/torch/nn/modules/container.py", line 139, in forward
+    input = module(input)
+  File "/mnt/nfs/clustersw/Debian/bullseye/cuda/11.3/pytorch/1.12.1/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1130, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/nfs/scistore14/chlgrp/fbrau/lipschitz-layers-evaluation/models/layers/lot.py", line 80, in forward
+    T = (0.5+0j) * ((3+0j) * I - Z @ Y)
+RuntimeError: CUDA out of memory. Tried to allocate 50.00 MiB (GPU 0; 22.20 GiB total capacity; 20.33 GiB already allocated; 44.12 MiB free; 21.09 GiB reserved in total by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF

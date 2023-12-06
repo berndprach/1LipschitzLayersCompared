@@ -1,0 +1,48 @@
+batch_size: 256
+device: cuda
+epochs: 9564
+eval_metrics:
+  margin_at_50: !metric
+    aggregation: 'lambda x: -((-x).quantile(0.5))'
+    name: Margin
+  robstacc_108: !metric
+    eps: 0.4235
+    name: RobustAccuracy
+  robstacc_255: !metric
+    eps: 1.0
+    name: RobustAccuracy
+  robstacc_36: !metric
+    eps: 0.1411
+    name: RobustAccuracy
+  robstacc_72: !metric
+    eps: 0.2824
+    name: RobustAccuracy
+  throughput: !metric
+    name: Throughput
+loss: !metric
+  margin: 0.3993
+  name: LipCrossEntropyLoss
+  temperature: 0.25
+lr_scheduler: !scheduler
+  epochs: 9564
+  name: OneCycleLR
+model: !model
+  get_activation: !layer 'MaxMin'
+  get_conv: !layer 'CPLConv2d'
+  model_id: ConvNetS
+  name: conv_net
+  seed: 100
+num_workers: 4
+optimizer: !optimizer
+  lr: 0.0703865168337984
+  momentum: 0.9
+  name: SGD
+  weight_decay: 0.0001496491841479
+trainset: !dataset
+  center: true
+  name: CIFAR10
+  train: true
+valset: !dataset
+  center: true
+  name: CIFAR10
+  train: false

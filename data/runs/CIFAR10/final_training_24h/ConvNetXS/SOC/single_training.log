@@ -1,0 +1,4 @@
+20230823:07:37:25 > Start single training with run id: 20230823_053725.64
+20230823:07:37:25 >> Run path: data/runs/final_training_24h/ConvNetXS/SOC
+20230823:07:37:25 >> Device: cuda
+20230823:07:37:25 

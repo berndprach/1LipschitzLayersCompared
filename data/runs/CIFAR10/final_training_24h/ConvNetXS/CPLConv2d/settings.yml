@@ -1,0 +1,84 @@
+
+## Training settings for CIFAR10 and the main greedy search
+## These settings file are automatically generated you should not edit them
+## If you want to change the settings, please edit the defaults.yml file
+## or the epoch_budget.yml file
+
+model:
+  !model
+  name: conv_net
+  model_id: ConvNetXS
+  get_conv: !layer CPLConv2d
+  get_activation: !layer MaxMin
+  seed: !randint [0,999]
+
+epochs: 10032
+
+optimizer:
+  !optimizer
+  name: SGD    
+  lr: 0.0342710854594042
+  weight_decay: 0.0001271843850439
+  momentum: 0.9
+  
+
+lr_scheduler:
+  !scheduler
+  name: OneCycleLR
+  epochs: 10032
+
+loss:
+  !metric
+  name: LipCrossEntropyLoss
+  margin: 0.3993
+  temperature: 0.25
+  
+
+trainset:
+  !dataset
+  name: CIFAR10
+  train: True
+  center: true
+  
+
+valset:
+  !dataset
+  name: CIFAR10
+  train: False
+  center: true
+  
+
+# Other settings
+batch_size: 256
+num_workers: 4
+
+eval_metrics:
+  margin_at_50:
+    !metric
+    name: Margin
+    aggregation: 'lambda x: -((-x).quantile(0.5))'
+
+  robstacc_36:
+    !metric
+    name: RobustAccuracy
+    eps: 0.1411 
+
+  robstacc_72:
+    !metric
+    name: RobustAccuracy
+    eps: 0.2824
+
+  robstacc_108:
+    !metric
+    name: RobustAccuracy
+    eps: 0.4235
+
+  robstacc_255:
+    !metric
+    name: RobustAccuracy
+    eps: 1.0
+
+  throughput:
+    !metric
+    name: Throughput
+

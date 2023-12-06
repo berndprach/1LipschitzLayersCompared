@@ -1,0 +1,10 @@
+20230822:10:14:40 > Start single training with run id: 20230822_081440.15
+20230822:10:14:40 >> Run path: data/runs/final_training_24h/ConvNetS/CPLConv2d
+20230822:10:14:40 >> Device: cuda
+20230822:10:14:40 
+20230914:00:16:56 > Start single training with run id: 20230913_221656.2eps
+20230914:00:16:56 >> Run path: data/runs/CIFAR10/final_training_24h/ConvNetS/CPLConv2d
+20230914:00:16:56 >> Device: cuda
+20230914:00:16:56 >> Debug mode: False
+20230914:00:16:56 >> Save memory mode: False
+20230914:00:16:56 
