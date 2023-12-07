@@ -3,6 +3,8 @@ Convex Potential Layer:
 https://arxiv.org/pdf/2110.12690.pdf
 Based on
 https://github.com/araujoalexandre/Lipschitz-SLL-Networks/blob/main/core/models/layers.py
+Implementation by the original authors (using a different initialization):
+https://github.com/MILES-PSL/Convex-Potential-Layer/blob/main/layers.py
 """
 
 from typing import Optional, Callable, Union, Any
