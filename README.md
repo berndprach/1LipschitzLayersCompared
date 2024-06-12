@@ -1,5 +1,6 @@
 # 1-Lipschitz Layers Compared: Memory, Speed, and Certifiable Robustness
-This repository contains code for the paper [1-Lipschitz Layers Compared: Memory, Speed, and Certifiable Robustness](https://arxiv.org/abs/2311.16833),
+This repository contains code for the paper 
+[1-Lipschitz Layers Compared: Memory, Speed, and Certifiable Robustness](https://berndprach.github.io/publication/1LipschitzLayersCompared),
 where we compare different methods of generating 1-Lipschitz layers. A figure summarizing our findings is below.
 Higher values means better performance.
 
