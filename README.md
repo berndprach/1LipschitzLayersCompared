@@ -8,6 +8,23 @@ Higher values means better performance.
 In this repository we provide the code for both the random hyperparameter search, as well as training the final models.
 We also provide code to estimate the memory and time requirements for each method.
 
+## Installation
+To install the lipnn package, run the following command:
+```[bash]
+$ pip install git+https://github.com/berndprach/1LipschitzLayersCompared.git
+```
+## Download the pretrained models from torch hub
+The pretrained models can be downloaded from torch hub by running:
+```[python]
+import torch
+model = torch.hub.load("berndprach/1LipschitzLayersCompared", "cifar10_lipconvS_aol", pretrained=True)
+```
+
+A list of available models can be obtained by a python script as follows
+```[python]
+import torch
+print(torch.hub.list("berndprach/1LipschitzLayersCompared" ,force_reload=True))
+```
 ## Requirements
 - torch==1.12
 - python==3.9
