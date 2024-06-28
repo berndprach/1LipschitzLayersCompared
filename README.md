@@ -30,7 +30,7 @@ y = layer(x)
 If you only want to test the models in your own environments, without installing the package, the pretrained models can be downloaded from torch hub by running:
 ```[python]
 import torch
-model = torch.hub.load("berndprach/1LipschitzLayersCompared", "cifar10_lipconvS_aol", pretrained=True)
+model = torch.hub.load("berndprach/1LipschitzLayersCompared", "cifar10_lipnetS_aol", pretrained=True)
 ```
 
 A list of available models can be obtained by a python script as follows
