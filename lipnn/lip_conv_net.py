@@ -89,9 +89,8 @@ class LipConvNet(nn.Sequential):
 def _lip_conv_net(model_id: str, model_url: str, pretrained: bool=False, **kwargs) -> LipConvNet:
     model = LipConvNet(**kwargs)
     if pretrained:
-        raise NotImplementedError
         model.load_state_dict(torch.hub.load_state_dict_from_url(model_url))
-    setattr(model, '__class__.__name__', model_id)
+    model.__class__.__name__  = model_id
     return model
 
 thismodule = sys.modules[__name__]
@@ -127,9 +126,17 @@ def get_url_models(model_id: str, dataset: str, layer_id: str) -> str:
                                 t_lipnetS='TConvNetS',
                                 t_lipnetM='TConvNetM',
                                 t_lipnetL='TConvNetL')
-    path = f'{base_url}/{dataset.upper()}/final_training_24h/'
-    path += f'{translate_model_dict[model_id]}/{LAYERS_DICT[layer_id]}.pth'
-
+    ## reading path from mapping file
+    _model_id = translate_model_dict[model_id]
+    _layer_id = LAYERS_DICT[layer_id]
+    _dataset = dataset.upper()
+    with open(base_url+'/state_dict_map.txt', 'r') as f:
+        state_dict_map = f.readlines()
+        for line in state_dict_map:
+            if (_model_id in line) and (_dataset in line) and (_layer_id in line):
+                path = line.split(',')[-1]
+                break
+    return f'{base_url}/{path}'
 
 
 for dataset in DATASET_NROF_CLASSES.keys():
