@@ -15,8 +15,19 @@ To install the lipnn package, run the following command:
 ```[bash]
 $ pip install git+https://github.com/berndprach/1LipschitzLayersCompared.git
 ```
+## Usage of the layers
+
+The layers can be used as follows:
+```[python]
+import torch
+from lipnn.layers import AOLConv2d
+x = torch.randn(1, 3, 32, 32)
+layer = AOLConv2d(3, 64, 3)
+y = layer(x)
+```
+
 ## Download the pretrained models from torch hub
-The pretrained models can be downloaded from torch hub by running:
+If you only want to test the models in your own environments, without installing the package, the pretrained models can be downloaded from torch hub by running:
 ```[python]
 import torch
 model = torch.hub.load("berndprach/1LipschitzLayersCompared", "cifar10_lipconvS_aol", pretrained=True)
@@ -27,13 +38,13 @@ A list of available models can be obtained by a python script as follows
 import torch
 print(torch.hub.list("berndprach/1LipschitzLayersCompared" ,force_reload=True))
 ```
-## Requirements
-- torch==1.12
-- python==3.9
-
 
 ## Reproducing the results
 The results can be replicated by followng the steps below.
+
+### Requirements
+- torch==1.12
+- python==3.9
 
 ### Epoch estimation
 The following script create a yml file with the number of epochs to train for each model and each dataset <DATASET>. The file is saved in the directory `data/settings/<DATASET>`. An example of usage is the following:

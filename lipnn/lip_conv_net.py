@@ -4,8 +4,8 @@ from typing import Type, Optional, Callable
 from collections import OrderedDict
 import sys
 from functools import partial
-from layers import FirstChannels, ZeroChannelPad
-import layers
+from .layers import FirstChannels, ZeroChannelPad
+from . import layers
 
 
 class ConvBlock(nn.Sequential):
