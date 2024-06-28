@@ -105,7 +105,6 @@ DEFAULT_MODELS = OrderedDict([
     ('t_lipnetM', dict(nrof_layers_per_block=5, base_width=32, nrof_blocks=6, kernel_size=3)),
     ('t_lipnetL', dict(nrof_layers_per_block=5, base_width=64, nrof_blocks=6, kernel_size=3)),
 ])
-
 LAYERS_DICT = dict(cpl='CPLConv2d',
                    aol='AOLConv2d', 
                    bcop='BCOP', 
@@ -116,7 +115,7 @@ LAYERS_DICT = dict(cpl='CPLConv2d',
                    eco='ECO')
 
 def get_url_models(model_id: str, dataset: str, layer_id: str) -> str:
-    base_url = 'https://github.com/berndprach/1LipschitzLayersCompared/tree/main/data/runs'
+    base_url = 'https://github.com/berndprach/1LipschitzLayersCompared/releases/download/weights'
 
     translate_model_dict = dict(lipnetXS='ConvNetXS',
                                 lipnetS='ConvNetS',
@@ -130,12 +129,7 @@ def get_url_models(model_id: str, dataset: str, layer_id: str) -> str:
     _model_id = translate_model_dict[model_id]
     _layer_id = LAYERS_DICT[layer_id]
     _dataset = dataset.upper()
-    with open(base_url+'/state_dict_map.txt', 'r') as f:
-        state_dict_map = f.readlines()
-        for line in state_dict_map:
-            if (_model_id in line) and (_dataset in line) and (_layer_id in line):
-                path = line.split(',')[-1]
-                break
+    path=f'{_dataset}_final_training_24h_{_model_id}_{_layer_id}.pth'
     return f'{base_url}/{path}'
 
 
