@@ -1,6 +1,7 @@
 
 from .lipschitz.aol import AOLConv2d
 from .lipschitz.bcop import BCOP
+from .lipschitz.bjorck import BjorckLinear
 from .lipschitz.cayley import CayleyConv, CayleyLinear
 from .lipschitz.cpl import CPLConv2d
 from .lipschitz.eco import ECO

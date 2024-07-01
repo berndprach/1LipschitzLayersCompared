@@ -40,10 +40,7 @@ class CayleyConv(nn.Conv2d):
             cout, cin, n * (n // 2 + 1)).permute(2, 0, 1).conj()
 
         if self.alpha is None:
-            # self.alpha = nn.Parameter(torch.tensor(
-            #     wfft.norm().item(), requires_grad=True).to(x.device))
             self.alpha = nn.Parameter(torch.tensor(
-                # wfft.norm().item(), requires_grad=True).to(wfft.device))
                 wfft.norm().item(), requires_grad=True).to(self.weight.device))
 
         return cayley(self.alpha * wfft / wfft.norm())
@@ -73,6 +70,10 @@ class CayleyConv(nn.Conv2d):
             y += self.bias[:, None, None]
         return y
 
+    def _load_from_state_dict(self, state_dict, prefix, local_metadata, strict, missing_keys, unexpected_keys, error_msgs):
+        if prefix + 'alpha' in state_dict:
+            self.alpha = nn.Parameter(state_dict.pop(prefix + 'alpha'), device=self.weight.device)
+        return super()._load_from_state_dict(state_dict, prefix, local_metadata, strict, missing_keys, unexpected_keys, error_msgs)
 
 class CayleyLinear(nn.Linear):
     def __init__(self, in_features, out_features, bias=True):
