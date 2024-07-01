@@ -2,20 +2,36 @@
 This repository contains code for the paper 
 [1-Lipschitz Layers Compared: Memory, Speed, and Certifiable Robustness](https://berndprach.github.io/publication/1LipschitzLayersCompared),
 where we compare different methods of generating 1-Lipschitz layers. A figure summarizing our findings is below.
-Higher values means better performance. 
+Higher values mean better performance. 
 (Find a simplified version of the code [here](https://github.com/berndprach/OneLipschitzLayersCompared).)
 
 <img src="https://github.com/berndprach/1LipschitzLayersCompared/blob/main/data/radar_plot.png" alt="Radar plot of results" width="800"/>
 
-In this repository we provide the code for both the random hyperparameter search, as well as training the final models.
+In this repository, we provide the code for both the random hyperparameter search, as well as training the final models.
 We also provide code to estimate the memory and time requirements for each method.
 
-## Installation
+## Pre-trained models from torch hub :new::tada:
+If you only want to test the models in your environments, without installing the package or downloading the whole repo, the pre-trained models can be downloaded from torch hub by running
+```[python]
+import torch
+model = torch.hub.load("berndprach/1LipschitzLayersCompared", "cifar10_lipnetS_aol", pretrained=True)
+```
+
+A list of available models can be obtained by by running the following commands
+```[python]
+import torch
+print(torch.hub.list("berndprach/1LipschitzLayersCompared" ,force_reload=True))
+```
+
+## Importing 1-Lipschitz-layers
+To use the 1-Lipschitz-layers (and more) in your own models, you can consider importing them from this repo
+### Installation :new: :tada:
+This repository cont
 To install the lipnn package, run the following command:
 ```[bash]
 $ pip install git+https://github.com/berndprach/1LipschitzLayersCompared.git
 ```
-## Usage of the layers
+### Usage of the layers
 
 The layers can be used as follows:
 ```[python]
@@ -26,38 +42,27 @@ layer = AOLConv2d(3, 64, 3)
 y = layer(x)
 ```
 
-## Download the pretrained models from torch hub
-If you only want to test the models in your own environments, without installing the package, the pretrained models can be downloaded from torch hub by running:
-```[python]
-import torch
-model = torch.hub.load("berndprach/1LipschitzLayersCompared", "cifar10_lipnetS_aol", pretrained=True)
-```
 
-A list of available models can be obtained by a python script as follows
-```[python]
-import torch
-print(torch.hub.list("berndprach/1LipschitzLayersCompared" ,force_reload=True))
-```
 
 ## Reproducing the results
-The results can be replicated by followng the steps below.
+The results can be replicated by following the steps below.
 
 ### Requirements
 - torch==1.12
 - python==3.9
 
 ### Epoch estimation
-The following script create a yml file with the number of epochs to train for each model and each dataset <DATASET>. The file is saved in the directory `data/settings/<DATASET>`. An example of usage is the following:
+The following script creates a yml file with the number of epochs to train for each model and each dataset <DATASET>. The file is saved in the directory `data/settings/<DATASET>`. An example of usage is the following:
 
 ```[bash]
 $ python3 epoch_budget_estimator.py --dataset CIFAR10
 ```
 
-Other arguments are available (e.g. training time, update exisiting measurment for a specific method). See the help of the script for more information.
+Other arguments are available (e.g. training time, updated existing measurements for a specific method). See the help of the script for more information.
 
 ### Random Search
 
-In order to run a random search, you need to create a settings file for the specific model and the specific method. This can be done manually or by using the script ```make_tree.py``` that automatically generates the settings file for a random search. The setting files will be saved in directory tree that will be created by the script. The directory tree will be created in the directory specified by the argument `root_dir`.
+In order to run a random search, you need to create a settings file for the specific model and the specific method. This can be done manually or by using the script ```make_tree.py``` that automatically generates the settings file for a random search. The setting files will be saved in the directory tree that will be created by the script. The directory tree will be created in the directory specified by the argument `root_dir`.
 ```[bash]
 $ python3 make_tree.py --root_dir /data/runs/CIFAR10/my_random_search \
     --default settings/default_CIFAR10.yml \
@@ -98,7 +103,7 @@ where the argument `default` allows using a default settings file for the fixed 
 
 The settings file that we used for our implementations are available in the directory `settings`.
 
-Once the settings file and the directory tree are created, you can run the random search by runnign the training script for how many times you want. The training script has the following arguments:
+Once the settings file and the directory tree are created, you can run the random search by running the training script for how many times you want. The training script has the following arguments:
 
 ```[bash]
 $ python3 ./train.py /data/runs/CIFAR10/my_random_search/modelsize/mymethod \
@@ -147,14 +152,14 @@ Write your own model of the models in the `models` directory. The model must be 
 Write your own layer of the layers in the `models/layers/lipschitz` directory. The layer must be a subclass of `torch.nn.Module` or a callable that returns a `torch.nn.Module` instance. The layer should be properly importend in the `models/layers/__init__.py` file.
 
 ## Manually train a model using the train script
-The train scripts leverages a setting file to load all the requirements for the training (e.g. the model, the dataset, the optimizer, the loss function, etc.)
+The train scripts leverage a setting file to load all the requirements for the training (e.g. the model, the dataset, the optimizer, the loss function, etc.)
 ### Create a setting file
 An example of a settings file is given in `data/runs/example/settings.yml`.
 
 
-Create a directory in the direcotry `data/runs` with a name of your choice (e.g. `my_experiment`) and create a settings file in this directory. The settings file must be a yaml file and must be named `settings.yml`.
+Create a directory in the directory `data/runs` with a name of your choice (e.g. `my_experiment`) and create a settings file in this directory. The settings file must be a yaml file and must be named `settings.yml`.
 
-**Usage of tags**: The settings file uses tags to help the setting parser in initializing the model, the dataset, the optimizer and the loss function.
+**Usage of tags**: The settings file uses tags to help the setting parser initialize the model, the dataset, the optimizer, and the loss function.
 
 The tags can be deterministic:
 - `!model`
