@@ -1,5 +1,5 @@
 
-## modules for cifar10
+## models for cifar10
 from .lip_conv_net import (
     cifar10_lipnetXS_cpl, cifar10_lipnetXS_aol, cifar10_lipnetXS_bcop, cifar10_lipnetXS_cayley,
     cifar10_lipnetXS_lot, cifar10_lipnetXS_sll, cifar10_lipnetXS_soc,
@@ -11,7 +11,7 @@ from .lip_conv_net import (
     cifar10_lipnetL_lot, cifar10_lipnetL_sll, cifar10_lipnetL_soc,
 )
 
-## modules for cifar100
+## models for cifar100
 from .lip_conv_net import (
     cifar100_lipnetXS_cpl, cifar100_lipnetXS_aol, cifar100_lipnetXS_bcop, cifar100_lipnetXS_cayley,
     cifar100_lipnetXS_lot, cifar100_lipnetXS_sll, cifar100_lipnetXS_soc,
@@ -23,7 +23,7 @@ from .lip_conv_net import (
     cifar100_lipnetL_lot, cifar100_lipnetL_sll, cifar100_lipnetL_soc,
 )
 
-## modules for tiny_imagenet
+## models for tiny_imagenet
 from .lip_conv_net import (
     tiny_imagenet_lipnetXS_cpl, tiny_imagenet_lipnetXS_aol, tiny_imagenet_lipnetXS_bcop, tiny_imagenet_lipnetXS_cayley,
     tiny_imagenet_lipnetXS_lot, tiny_imagenet_lipnetXS_sll, tiny_imagenet_lipnetXS_soc,

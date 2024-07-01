@@ -140,11 +140,18 @@ for dataset in DATASET_NROF_CLASSES.keys():
             nrof_classes = DATASET_NROF_CLASSES[dataset]
             _model_id_aux = model_id if dataset != 'tiny_imagenet' else f't_{model_id}'
             default_kwargs = DEFAULT_MODELS[_model_id_aux]
+            linear = None
+            if layer_id == 'bcop':
+                linear = getattr(layers, 'BjorckLinear')
+            elif layer_id == 'cayley':
+                linear = getattr(layers, 'CayleyLinear')
+            
             setattr(thismodule, 
                     f'{dataset}_{model_id}_{layer_id}', 
                     partial(_lip_conv_net, model_id = model_id, 
                                           model_url = get_url_models(model_id, dataset, layer_id),
                                           conv = getattr(layers, LAYERS_DICT[layer_id]),
+                                          linear = linear,
                                           activation=layers.MaxMin,
                                           nrof_classes = DATASET_NROF_CLASSES[dataset],
                                           **default_kwargs
