@@ -95,7 +95,13 @@ class CPLConv2d(nn.Module):
         # The following code handle the unknown-dimension buffer 'u'
         if prefix + 'u' in state_dict:
             u = state_dict.pop(prefix + 'u').to(self.kernel.device)
+            super()._load_from_state_dict(state_dict, prefix, local_metadata, strict,
+                                      missing_keys, unexpected_keys, error_msgs)
             self.register_buffer('u', u)
             self.u_initialized = True
-        super()._load_from_state_dict(state_dict, prefix, local_metadata, strict,
+        else:
+            super()._load_from_state_dict(state_dict, prefix, local_metadata, strict,
                                       missing_keys, unexpected_keys, error_msgs)
+        
+    def extra_repr(self) -> str:
+        return f'CPLConv2d(in_channels={self.kernel.shape[1]}, out_channels={self.kernel.shape[0]}, kernel_size={tuple(self.kernel.shape[-2:])}, activation={self.activation})'
