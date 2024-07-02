@@ -94,7 +94,8 @@ class CPLConv2d(nn.Module):
                               missing_keys, unexpected_keys, error_msgs):
         # The following code handle the unknown-dimension buffer 'u'
         if prefix + 'u' in state_dict:
-            self.u = state_dict.pop(prefix + 'u').to(self.kernel.device)
+            u = state_dict.pop(prefix + 'u').to(self.kernel.device)
+            self.register_buffer('u', u)
             self.u_initialized = True
         super()._load_from_state_dict(state_dict, prefix, local_metadata, strict,
                                       missing_keys, unexpected_keys, error_msgs)
